@@ -1,4 +1,4 @@
-package gone_tcp
+package tcp
 
 import (
 	"fmt"

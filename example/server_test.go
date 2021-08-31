@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/kklab-com/gone-core/channel"
-	gone_tcp "github.com/kklab-com/gone-tcp"
+	"github.com/kklab-com/gone-tcp/tcp"
 	"github.com/kklab-com/goth-kklogger"
 	"github.com/kklab-com/goth-kkutil/buf"
 	"github.com/kklab-com/goth-kkutil/concurrent"
@@ -15,7 +15,7 @@ import (
 func TestServer_Start(t *testing.T) {
 	kklogger.SetLogLevel("DEBUG")
 	bootstrap := channel.NewServerBootstrap()
-	bootstrap.ChannelType(&gone_tcp.ServerChannel{})
+	bootstrap.ChannelType(&tcp.ServerChannel{})
 	bootstrap.Handler(channel.NewInitializer(func(ch channel.Channel) {
 		ch.Pipeline().AddLast("INDICATE_HANDLER_INBOUND", &channel.IndicateHandlerInbound{})
 		ch.Pipeline().AddLast("INDICATE_HANDLER_OUTBOUND", &channel.IndicateHandlerOutbound{})
@@ -36,7 +36,7 @@ func TestServer_Start(t *testing.T) {
 
 	go func() {
 		bootstrap := channel.NewBootstrap()
-		bootstrap.ChannelType(&gone_tcp.Channel{})
+		bootstrap.ChannelType(&tcp.Channel{})
 		bootstrap.Handler(channel.NewInitializer(func(ch channel.Channel) {
 			ch.Pipeline().AddLast("INDICATE_HANDLER_INBOUND", &channel.IndicateHandlerInbound{})
 			ch.Pipeline().AddLast("DECODE_HANDLER", NewDecodeHandler())

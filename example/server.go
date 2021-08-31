@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/kklab-com/gone-core/channel"
-	gone_tcp "github.com/kklab-com/gone-tcp"
+	"github.com/kklab-com/gone-tcp/tcp"
 )
 
 type Server struct {
@@ -13,7 +13,7 @@ type Server struct {
 
 func (k *Server) Start(localAddr net.Addr) {
 	bootstrap := channel.NewServerBootstrap()
-	bootstrap.ChannelType(&gone_tcp.ServerChannel{})
+	bootstrap.ChannelType(&tcp.ServerChannel{})
 	bootstrap.ChildHandler(channel.NewInitializer(func(ch channel.Channel) {
 		ch.Pipeline().AddLast("DECODE_HANDLER", NewDecodeHandler())
 		ch.Pipeline().AddLast("HANDLER", &ServerChildHandler{})
