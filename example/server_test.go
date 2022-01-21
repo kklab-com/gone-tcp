@@ -10,10 +10,12 @@ import (
 	"github.com/kklab-com/goth-kklogger"
 	"github.com/kklab-com/goth-kkutil/buf"
 	"github.com/kklab-com/goth-kkutil/concurrent"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestServer_Start(t *testing.T) {
 	kklogger.SetLogLevel("DEBUG")
+	serverChildHandler := &ServerChildHandler{}
 	bootstrap := channel.NewServerBootstrap()
 	bootstrap.ChannelType(&tcp.ServerChannel{})
 	bootstrap.Handler(channel.NewInitializer(func(ch channel.Channel) {
@@ -24,23 +26,24 @@ func TestServer_Start(t *testing.T) {
 	bootstrap.ChildHandler(channel.NewInitializer(func(ch channel.Channel) {
 		ch.Pipeline().AddLast("INDICATE_HANDLER_INBOUND", &channel.IndicateHandlerInbound{})
 		ch.Pipeline().AddLast("DECODE_HANDLER", NewDecodeHandler())
-		ch.Pipeline().AddLast("HANDLER", &ServerChildHandler{})
+		ch.Pipeline().AddLast("HANDLER", serverChildHandler)
 		ch.Pipeline().AddLast("INDICATE_HANDLER_OUTBOUND", &channel.IndicateHandlerOutbound{})
 	}))
 
 	ch := bootstrap.Bind(&net.TCPAddr{IP: nil, Port: 18082}).Sync().Channel()
 	go func() {
-		time.Sleep(time.Second * 3)
+		time.Sleep(time.Second * 1)
 		ch.Close()
 	}()
 
+	clientHandler := &ClientHandler{}
 	go func() {
 		bootstrap := channel.NewBootstrap()
 		bootstrap.ChannelType(&tcp.Channel{})
 		bootstrap.Handler(channel.NewInitializer(func(ch channel.Channel) {
 			ch.Pipeline().AddLast("INDICATE_HANDLER_INBOUND", &channel.IndicateHandlerInbound{})
 			ch.Pipeline().AddLast("DECODE_HANDLER", NewDecodeHandler())
-			ch.Pipeline().AddLast("HANDLER", &ClientHandler{})
+			ch.Pipeline().AddLast("HANDLER", clientHandler)
 			ch.Pipeline().AddLast("INDICATE_HANDLER_OUTBOUND", &channel.IndicateHandlerOutbound{})
 		}))
 
@@ -68,4 +71,9 @@ func TestServer_Start(t *testing.T) {
 	}()
 
 	ch.CloseFuture().Sync()
+	assert.Equal(t, int32(0), serverChildHandler.regTrigCount)
+	assert.Equal(t, int32(0), serverChildHandler.actTrigCount)
+	time.Sleep(time.Second)
+	assert.Equal(t, int32(0), clientHandler.regTrigCount)
+	assert.Equal(t, int32(0), clientHandler.actTrigCount)
 }

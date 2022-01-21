@@ -2,6 +2,7 @@ package example
 
 import (
 	"net"
+	"sync/atomic"
 	"time"
 
 	"github.com/kklab-com/gone-core/channel"
@@ -10,25 +11,30 @@ import (
 
 type ServerChildHandler struct {
 	channel.DefaultHandler
+	regTrigCount, actTrigCount int32
 }
 
 func (h *ServerChildHandler) Registered(ctx channel.HandlerContext) {
 	println("server registered")
+	atomic.AddInt32(&h.regTrigCount, 1)
 	ctx.FireRegistered()
 }
 
 func (h *ServerChildHandler) Unregistered(ctx channel.HandlerContext) {
 	println("server unregistered")
+	atomic.AddInt32(&h.regTrigCount, -1)
 	ctx.FireUnregistered()
 }
 
 func (h *ServerChildHandler) Active(ctx channel.HandlerContext) {
 	println("server active")
+	atomic.AddInt32(&h.actTrigCount, 1)
 	ctx.FireActive()
 }
 
 func (h *ServerChildHandler) Inactive(ctx channel.HandlerContext) {
 	println("server inactive")
+	atomic.AddInt32(&h.actTrigCount, -1)
 	ctx.FireInactive()
 }
 
@@ -61,5 +67,10 @@ func (h *ServerChildHandler) Connect(ctx channel.HandlerContext, localAddr net.A
 
 func (h *ServerChildHandler) Disconnect(ctx channel.HandlerContext, future channel.Future) {
 	println("server disconnect")
+	ctx.Disconnect(future)
+}
+
+func (h *ServerChildHandler) Deregister(ctx channel.HandlerContext, future channel.Future) {
+	println("server deregister")
 	ctx.Disconnect(future)
 }

@@ -2,31 +2,37 @@ package example
 
 import (
 	"net"
+	"sync/atomic"
 
 	"github.com/kklab-com/gone-core/channel"
 )
 
 type ClientHandler struct {
 	channel.DefaultHandler
+	regTrigCount, actTrigCount int32
 }
 
 func (h *ClientHandler) Registered(ctx channel.HandlerContext) {
 	println("client registered")
+	atomic.AddInt32(&h.regTrigCount, 1)
 	ctx.FireRegistered()
 }
 
 func (h *ClientHandler) Unregistered(ctx channel.HandlerContext) {
 	println("client unregistered")
+	atomic.AddInt32(&h.regTrigCount, -1)
 	ctx.FireUnregistered()
 }
 
 func (h *ClientHandler) Active(ctx channel.HandlerContext) {
 	println("client active")
+	atomic.AddInt32(&h.actTrigCount, 1)
 	ctx.FireActive()
 }
 
 func (h *ClientHandler) Inactive(ctx channel.HandlerContext) {
 	println("client inactive")
+	atomic.AddInt32(&h.actTrigCount, -1)
 	ctx.FireInactive()
 }
 
@@ -51,4 +57,9 @@ func (h *ClientHandler) Connect(ctx channel.HandlerContext, localAddr net.Addr, 
 func (h *ClientHandler) Disconnect(ctx channel.HandlerContext, future channel.Future) {
 	println("client disconnect")
 	ctx.Disconnect(future)
+}
+
+func (h *ClientHandler) Deregister(ctx channel.HandlerContext, future channel.Future) {
+	println("client deregister")
+	ctx.Deregister(future)
 }
