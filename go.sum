@@ -4,8 +4,8 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/google/uuid v1.1.1 h1:Gkbcsh/GbpXz7lPftLA3P6TYMwjCLYm83jiFQZF/3gY=
 github.com/google/uuid v1.1.1/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
-github.com/kklab-com/gone-core v1.1.1 h1:s34hLJUl8kt2tcoHTnNhrpvdvLrkO696uhG334Ieju8=
-github.com/kklab-com/gone-core v1.1.1/go.mod h1:mySMDCz29OeQ+XJFaLb+bzya2ty4/R0COIwIBhKIOpM=
+github.com/kklab-com/gone-core v1.1.2 h1:6QYVRTVWxYIk8XYKpdJMoqItXzYoNdNEos3clhP3IQs=
+github.com/kklab-com/gone-core v1.1.2/go.mod h1:mySMDCz29OeQ+XJFaLb+bzya2ty4/R0COIwIBhKIOpM=
 github.com/kklab-com/goth-base62 v1.0.0 h1:tFIhY1a34asPh41GWfWafUd1DBrzHViOOM6RWm7XfRk=
 github.com/kklab-com/goth-base62 v1.0.0/go.mod h1:zVOUVB/1H/vmOnZHOovnOXaJ9hpRTgSx0Sv63v0xaDI=
 github.com/kklab-com/goth-kklogger v1.0.1 h1:4QI3yr8PvaDsO3+6WB5FUcuNTQU6YN7R/AfMDv1Seno=
