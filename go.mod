@@ -3,9 +3,9 @@ module github.com/kklab-com/gone-tcp
 go 1.17
 
 require (
-	github.com/kklab-com/gone-core v1.1.0
+	github.com/kklab-com/gone-core v1.1.1
 	github.com/kklab-com/goth-kklogger v1.0.1
-	github.com/kklab-com/goth-kkutil v1.1.2
+	github.com/kklab-com/goth-kkutil v1.1.3
 	github.com/pkg/errors v0.8.0
 	github.com/stretchr/testify v1.7.0
 )
