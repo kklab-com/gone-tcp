@@ -4,8 +4,8 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/google/uuid v1.1.1 h1:Gkbcsh/GbpXz7lPftLA3P6TYMwjCLYm83jiFQZF/3gY=
 github.com/google/uuid v1.1.1/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
-github.com/kklab-com/gone-core v1.1.3-0.20220315044542-37aa9d50482a h1:rnY0miTeirQIPZwEgalVfv03nS2J1Y0qFQMh7H5KuWE=
-github.com/kklab-com/gone-core v1.1.3-0.20220315044542-37aa9d50482a/go.mod h1:e2TOf6YJxQS4PV6NvOUOBulAy7E0wr3kJZ78XbMIRsQ=
+github.com/kklab-com/gone-core v1.1.3 h1:Vqq085y93YOOLD5KEm8JuTNHlG9xVa18k0HOsrj5Hlc=
+github.com/kklab-com/gone-core v1.1.3/go.mod h1:e2TOf6YJxQS4PV6NvOUOBulAy7E0wr3kJZ78XbMIRsQ=
 github.com/kklab-com/goth-base62 v1.0.0 h1:tFIhY1a34asPh41GWfWafUd1DBrzHViOOM6RWm7XfRk=
 github.com/kklab-com/goth-base62 v1.0.0/go.mod h1:zVOUVB/1H/vmOnZHOovnOXaJ9hpRTgSx0Sv63v0xaDI=
 github.com/kklab-com/goth-bytebuf v1.0.0 h1:6njqv9/oWxg3/ZEfPe2Fe/Gc4UWOjpC67IKC+Pr+idA=
