@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/kklab-com/gone-core/channel"
-	"github.com/kklab-com/goth-kkutil/buf"
+	buf "github.com/kklab-com/goth-bytebuf"
 )
 
 type ServerChildHandler struct {

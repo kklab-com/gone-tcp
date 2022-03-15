@@ -7,9 +7,9 @@ import (
 
 	"github.com/kklab-com/gone-core/channel"
 	"github.com/kklab-com/gone-tcp/tcp"
+	buf "github.com/kklab-com/goth-bytebuf"
+	concurrent "github.com/kklab-com/goth-concurrent"
 	"github.com/kklab-com/goth-kklogger"
-	"github.com/kklab-com/goth-kkutil/buf"
-	"github.com/kklab-com/goth-kkutil/concurrent"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -47,7 +47,7 @@ func TestServer_Start(t *testing.T) {
 			ch.Pipeline().AddLast("INDICATE_HANDLER_OUTBOUND", &channel.IndicateHandlerOutbound{})
 		}))
 
-		bwg := concurrent.BurstWaitGroup{}
+		bwg := concurrent.WaitGroup{}
 		for i := 0; i < 10; i++ {
 			bwg.Add(1)
 			go func(i int) {
