@@ -3,7 +3,7 @@ module github.com/kklab-com/gone-tcp
 go 1.17
 
 require (
-	github.com/kklab-com/gone-core v1.1.5
+	github.com/kklab-com/gone-core v1.1.7
 	github.com/kklab-com/goth-bytebuf v1.0.1
 	github.com/kklab-com/goth-concurrent v1.1.0
 	github.com/kklab-com/goth-kklogger v1.0.1
