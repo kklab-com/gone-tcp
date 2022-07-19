@@ -73,18 +73,16 @@ func (h *connectionHandler) Active(ctx channel.HandlerContext) {
 	ctx.FireActive()
 }
 
-func (h *connectionHandler) Inactive(ctx channel.HandlerContext) {
+func (h *connectionHandler) Unregistered(ctx channel.HandlerContext) {
 	if !h.client.close && h.client.AutoReconnect != nil {
 		if h.client.AutoReconnect() {
-			if h.client.start() == nil {
-				h.Inactive(ctx)
-			} else {
-				ctx.FireInactive()
-			}
+			h.client.start()
 		} else {
 			h.client.close = true
 		}
 	}
+
+	ctx.FireUnregistered()
 }
 
 type clientHandlerAdapter struct {
