@@ -48,7 +48,7 @@ func (h *SimpleCodec) decode(ctx channel.HandlerContext, in buf.ByteBuf, out str
 	}
 }
 
-func (h *SimpleCodec) Write(ctx channel.HandlerContext, obj interface{}, future channel.Future) {
+func (h *SimpleCodec) Write(ctx channel.HandlerContext, obj any, future channel.Future) {
 	switch m := obj.(type) {
 	case buf.ByteBuf:
 		ctx.Write(VarIntEncode(uint64(m.ReadableBytes())).WriteByteBuf(m), future)

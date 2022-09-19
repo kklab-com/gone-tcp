@@ -15,7 +15,7 @@ type testServerHandler struct {
 	channel.DefaultHandler
 }
 
-func (h *testServerHandler) Read(ctx channel.HandlerContext, obj interface{}) {
+func (h *testServerHandler) Read(ctx channel.HandlerContext, obj any) {
 	ctx.Channel().Write(obj)
 }
 
@@ -32,7 +32,7 @@ func (h *testClientHandler) Active(ctx channel.HandlerContext) {
 	ctx.Channel().Write(buf.EmptyByteBuf().WriteInt32(h.num))
 }
 
-func (h *testClientHandler) Read(ctx channel.HandlerContext, obj interface{}) {
+func (h *testClientHandler) Read(ctx channel.HandlerContext, obj any) {
 	if obj.(buf.ByteBuf).ReadInt32() == h.num {
 		h.wg.Done()
 		h.num++

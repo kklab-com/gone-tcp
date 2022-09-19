@@ -38,7 +38,7 @@ func (h *ServerChildHandler) Inactive(ctx channel.HandlerContext) {
 	ctx.FireInactive()
 }
 
-func (h *ServerChildHandler) Read(ctx channel.HandlerContext, obj interface{}) {
+func (h *ServerChildHandler) Read(ctx channel.HandlerContext, obj any) {
 	str := obj.(string)
 	println("server read " + str)
 	if str != "h:c b:cc" {
@@ -55,7 +55,7 @@ func (h *ServerChildHandler) ReadCompleted(ctx channel.HandlerContext) {
 	println("server read_completed")
 }
 
-func (h *ServerChildHandler) Write(ctx channel.HandlerContext, obj interface{}, future channel.Future) {
+func (h *ServerChildHandler) Write(ctx channel.HandlerContext, obj any, future channel.Future) {
 	println("server write")
 	(ctx).Write(obj, future)
 }

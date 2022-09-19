@@ -134,7 +134,7 @@ func (h *clientHandlerAdapter) Inactive(ctx channel.HandlerContext) {
 	}
 }
 
-func (h *clientHandlerAdapter) Read(ctx channel.HandlerContext, obj interface{}) {
+func (h *clientHandlerAdapter) Read(ctx channel.HandlerContext, obj any) {
 	if h.client.Handler != nil {
 		h.client.Handler.Read(ctx, obj)
 	}
@@ -146,7 +146,7 @@ func (h *clientHandlerAdapter) ReadCompleted(ctx channel.HandlerContext) {
 	}
 }
 
-func (h *clientHandlerAdapter) Write(ctx channel.HandlerContext, obj interface{}, future channel.Future) {
+func (h *clientHandlerAdapter) Write(ctx channel.HandlerContext, obj any, future channel.Future) {
 	if h.client.Handler != nil {
 		h.client.Handler.Write(ctx, obj, future)
 	} else {

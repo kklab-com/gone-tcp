@@ -87,7 +87,7 @@ func (h *serverHandlerAdapter) Inactive(ctx channel.HandlerContext) {
 	}
 }
 
-func (h *serverHandlerAdapter) Read(ctx channel.HandlerContext, obj interface{}) {
+func (h *serverHandlerAdapter) Read(ctx channel.HandlerContext, obj any) {
 	if h.server.Handler != nil {
 		h.server.Handler.Read(ctx, obj)
 	}
@@ -99,7 +99,7 @@ func (h *serverHandlerAdapter) ReadCompleted(ctx channel.HandlerContext) {
 	}
 }
 
-func (h *serverHandlerAdapter) Write(ctx channel.HandlerContext, obj interface{}, future channel.Future) {
+func (h *serverHandlerAdapter) Write(ctx channel.HandlerContext, obj any, future channel.Future) {
 	if h.server.Handler != nil {
 		h.server.Handler.Write(ctx, obj, future)
 	} else {

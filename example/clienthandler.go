@@ -36,7 +36,7 @@ func (h *ClientHandler) Inactive(ctx channel.HandlerContext) {
 	ctx.FireInactive()
 }
 
-func (h *ClientHandler) Read(ctx channel.HandlerContext, obj interface{}) {
+func (h *ClientHandler) Read(ctx channel.HandlerContext, obj any) {
 	println("client read " + obj.(string))
 }
 
@@ -44,7 +44,7 @@ func (h *ClientHandler) ReadCompleted(ctx channel.HandlerContext) {
 	println("client read_completed")
 }
 
-func (h *ClientHandler) Write(ctx channel.HandlerContext, obj interface{}, future channel.Future) {
+func (h *ClientHandler) Write(ctx channel.HandlerContext, obj any, future channel.Future) {
 	println("client write")
 	ctx.Write(obj, future)
 }
