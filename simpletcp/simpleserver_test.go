@@ -44,7 +44,7 @@ func (h *testClientHandler) Read(ctx channel.HandlerContext, obj any) {
 func TestServer_Start(t *testing.T) {
 	kklogger.SetLogLevel("DEBUG")
 	server := NewServer(&testServerHandler{})
-	sch := server.Start(&net.TCPAddr{IP: nil, Port: 18082})
+	sch := server.Start(&net.TCPAddr{IP: nil, Port: 18083})
 	assert.NotNil(t, sch)
 	count := 10
 	for i := 0; i < count; i++ {
@@ -56,7 +56,7 @@ func TestServer_Start(t *testing.T) {
 				return tcHandler.active < count
 			}
 
-			cch := client.Start(&net.TCPAddr{IP: nil, Port: 18082})
+			cch := client.Start(&net.TCPAddr{IP: nil, Port: 18083})
 			assert.NotNil(t, cch)
 			tcHandler.wg.Wait()
 			assert.Equal(t, count, tcHandler.read)
@@ -72,7 +72,7 @@ func TestServer_Start(t *testing.T) {
 			return tcHandler.active < count
 		}
 
-		cch := client.Start(&net.TCPAddr{IP: nil, Port: 18082})
+		cch := client.Start(&net.TCPAddr{IP: nil, Port: 18083})
 		assert.NotNil(t, cch)
 		tcHandler.wg.Wait()
 		assert.Equal(t, count, tcHandler.read)
